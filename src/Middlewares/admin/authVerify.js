@@ -13,7 +13,7 @@ import ApiError from "../../utils/ApiError.js";
 import jwt from "jsonwebtoken";
 import Admin from "../../models/Admin.model.js";
 
-const authVerify = asyncHandler(async (req, res, next) => {
+export const authVerify = asyncHandler(async (req, res, next) => {
   const adminToken =
     req.cookies?.adminAccessToken ||
     req.headers["authorization"]?.replace("Bearer ", "");
