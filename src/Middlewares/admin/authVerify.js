@@ -11,7 +11,7 @@
 import asyncHandler from "../../utils/asyncHandler.js";
 import ApiError from "../../utils/ApiError.js";
 import jwt from "jsonwebtoken";
-import Admin from "../../models/Admin.model.js";
+import {Admin} from "../../models/Admin.model.js";
 
 export const authVerify = asyncHandler(async (req, res, next) => {
   const adminToken =

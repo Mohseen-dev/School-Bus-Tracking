@@ -19,7 +19,7 @@ const adminSchema = new mongoose.Schema(
       required: [true, "password is required"],
       minlength: [6, "password must be greater then 6 character"],
       maxlength: [12, "password must be smaller then 12 character"],
-      Select:false
+      Select:true
     },
     phone: {
       type: String,
@@ -41,9 +41,9 @@ const adminSchema = new mongoose.Schema(
 adminSchema.pre("save",async function (next){
     if(this.isModified("password")){
         this.password = await bcrypt.hash(this.password,10);
-        next();
+        // next();
     }
-    next();
+    // next();
 })
 
 adminSchema.methods.comparePassword = async function(enteredPassword){

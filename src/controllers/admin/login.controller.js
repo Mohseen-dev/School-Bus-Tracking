@@ -9,7 +9,7 @@
 
 import { Admin } from "../../models/Admin.model.js";
 import ApiError from "../../utils/ApiError.js";
-import ApiRespone from "../../utils/ApiResponse.js";
+import ApiResponse from "../../utils/ApiResponse.js";
 import asyncHandler from "../../utils/asyncHandler.js";
 import jwt from "jsonwebtoken";
 
@@ -42,10 +42,14 @@ const loginAdmin = asyncHandler(async (req, res) => {
     secure: true,
   };
 
+  const adminData = findedAdmin.toObject();
+  delete adminData.password;
+
+
   res
     .status(200)
     .cookie("adminAccessToken", token)
-    .json(new ApiResponse(200, findedAdmin, "successfully login and set cookies"));
+    .json(new ApiResponse(200, adminData, "successfully login and set cookies"));
 });
 
 

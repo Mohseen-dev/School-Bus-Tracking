@@ -33,7 +33,7 @@ const busSchema = new mongoose.Schema(
     isActive: {
         type: Boolean,
         default: true,
-        required:true,
+        // required:true,
     },
   },
   { timestamps: true }
