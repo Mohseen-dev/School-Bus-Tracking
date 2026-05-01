@@ -51,10 +51,10 @@ const driverSchema = new mongoose.Schema(
 
 driverSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
-    return next();
+    // return next();
   }
   this.password = await bcrypt.hash(this.password, 10);
-  next();
+  // next();
 });
 driverSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);

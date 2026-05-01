@@ -54,6 +54,8 @@ export const createBus = asyncHandler(async (req, res) => {
     isActive: true,
   });
 
+  
+
   res
     .status(201)
     .json(new ApiResponse(201, newBus, "Bus created successfully"));
