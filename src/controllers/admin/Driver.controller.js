@@ -40,11 +40,36 @@ export const createDriver = asyncHandler(async (req, res) => {
     isActive,
   });
 
-  if(!newDriver){
-    throw new ApiError(500,"failed to create Driver");
+  if (!newDriver) {
+    throw new ApiError(500, "failed to create Driver");
   }
-  res.status(201).json(
-    new ApiResponse(201,newDriver,"Driver created Successfully")
-  )
+  res
+    .status(201)
+    .json(new ApiResponse(201, newDriver, "Driver created Successfully"));
 });
 
+export const getDriver = asyncHandler(async (req, res) => {
+  // console.log(req.params.id)
+
+  const id = req.params.id;
+  const driver = await Driver.findById(id);
+
+  if (!driver) {
+    throw new ApiError(404, "Driver not found");
+  }
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, driver, "Driver fetched successfully"));
+});
+
+export const getDrivers = asyncHandler(async (req, res) => {
+  const allDrivers = await Driver.find();
+  console.log(allDrivers);
+  if (allDrivers?.length < 0) {
+    res.status(200).json(new ApiResponse(200, allDrivers, "No Driver"));
+  }
+  res
+    .status(200)
+    .json(new ApiResponse(200, allDrivers, "fetched all Drivers successfully"));
+});
