@@ -1,24 +1,26 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const routeSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
-        trim:true,
-        unique:true,
-        lowercase:true
-    
+const routeSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
+      lowercase: true,
     },
-    stops:[
-        {
-            name:{type:String,trim:true,lowercase:true},
-            lat:{type:Number},
-            lng:{type:Number},
-            order:{type:Number},
-            expectedTime:{type:Number}
-        }
+    stops: [
+      {
+        name: { type: String, trim: true, lowercase: true,required: true },
+        lat: { type: Number, required: true },
+        lng: { type: Number, required: true },
+        order: { type: Number, required: true , unique:true},
+        expectedTime: { type: Number, required: true },
+      },
     ],
-    isActive:{type:Boolean,required:true,default:true}
-},{timestamps:true});
+    isActive: { type: Boolean, required: true, default: true },
+  },
+  { timestamps: true }
+);
 
-export const Route = mongoose.model("Route",routeSchema)
+export const Route = mongoose.model("Route", routeSchema);
