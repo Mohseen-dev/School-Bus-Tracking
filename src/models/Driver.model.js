@@ -49,12 +49,30 @@ const driverSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-driverSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    // return next();
-  }
-  this.password = await bcrypt.hash(this.password, 10);
-  // next();
+driverSchema.pre("save", async function(next) {
+
+   try {
+
+      const password = this.password;
+
+      if (!this.isModified("password")) {
+         return next();
+      }
+
+      if (!password) {
+         return next(new Error("Password is undefined before hashing"));
+      }
+
+      const hashedPassword = await bcrypt.hash(String(password), 10);
+
+      this.password = hashedPassword;
+
+      next();
+
+   } catch (error) {
+      console.log("HOOK ERROR:", error);
+      next(error);
+   }
 });
 driverSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);

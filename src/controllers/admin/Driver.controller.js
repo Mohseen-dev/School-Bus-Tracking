@@ -4,6 +4,8 @@ import ApiResponse from "../../utils/ApiResponse.js";
 import asyncHandler from "../../utils/asyncHandler.js";
 
 export const createDriver = asyncHandler(async (req, res) => {
+
+  console.log("Received request to create driver with data:", req.body);
   const {
     name,
     email,
@@ -11,11 +13,16 @@ export const createDriver = asyncHandler(async (req, res) => {
     phone,
     licenseNumber,
     licenseExpiry,
-    assigneBusId,
     isActive,
   } = req.body;
 
-  if (!name || !email || !password || !licenseExpiry || !licenseNumber) {
+  if (
+    !name?.trim() ||
+    !email?.trim() ||
+    !password?.trim() ||
+    !licenseNumber?.trim() ||
+    !licenseExpiry
+  ) {
     throw new ApiError(400, "All fields are required");
   }
 
@@ -33,19 +40,16 @@ export const createDriver = asyncHandler(async (req, res) => {
   const newDriver = await Driver.create({
     name,
     email,
-    password,
+    password: password.trim(),
     phone,
     licenseNumber,
     licenseExpiry,
     isActive,
   });
 
-  if (!newDriver) {
-    throw new ApiError(500, "failed to create Driver");
-  }
-  res
+  return res
     .status(201)
-    .json(new ApiResponse(201, newDriver, "Driver created Successfully"));
+    .json(new ApiResponse(201, newDriver, "Driver created successfully"));
 });
 
 export const getDriver = asyncHandler(async (req, res) => {

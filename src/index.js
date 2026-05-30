@@ -7,7 +7,7 @@ connectToDB()
       console.error("server error : src/index.js :: ", error.message);
     });
     app.listen(process.env.PORT || 8000, () => {
-      console.log(`server is serving at port ${process.env.PORT}`);
+      console.log(`server is serving at port number ${process.env.PORT}`);
     });
   })
   .catch((error) => {

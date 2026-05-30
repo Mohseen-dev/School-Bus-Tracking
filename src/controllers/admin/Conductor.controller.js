@@ -56,5 +56,5 @@ export const getConductors = asyncHandler(async (req, res) => {
 
   res
     .status(200)
-    .json(new ApiResponse(200, conductors, "Conductors fetched Successfully."));
+    .json(new ApiResponse(200, conductors, "Conductors fetched successfully"));
 });
