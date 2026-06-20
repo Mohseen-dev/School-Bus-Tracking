@@ -20,6 +20,12 @@ export const createRoute = asyncHandler(async (req, res) => {
       );
     }
   });
+
+  const orders = stops.map((stop)=> stop.order);
+  const uniqueOrders = new Set(orders);
+  if(uniqueOrders.size !== orders.length){
+    throw new ApiError(400, "Stop orders must be unique.");
+  }
   const existingRoute = await Route.findOne({ name });
 
   if (existingRoute) {

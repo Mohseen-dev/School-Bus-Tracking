@@ -14,7 +14,7 @@ const routeSchema = new mongoose.Schema(
         name: { type: String, trim: true, lowercase: true,required: true },
         lat: { type: Number, required: true },
         lng: { type: Number, required: true },
-        order: { type: Number, required: true , unique:true},
+        order: { type: Number, required: true},
         expectedTime: { type: Number, required: true },
       },
     ],

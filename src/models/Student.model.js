@@ -2,18 +2,18 @@ import mongoose from "mongoose";
 
 const studentSchema = new mongoose.Schema(
   {
-    StudentName: {
+    studentName: {
       type: String,
       required: true,
       trim: true,
       lowercase: true,
     },
-    roll: {
+    rollNumber: {
       type: String,
       required: true,
       unique: true,
     },
-    class: {
+    grade: {
       type: Number,
       required: true,
       trim: true,
@@ -25,18 +25,19 @@ const studentSchema = new mongoose.Schema(
     parentId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Parent",
+      required:true
     },
     assignedBusId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Bus",
     },
-    routeId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Route",
-    },
+    // routeId: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Route",
+    // },
     qrCode: {
       type: String,
-      // required:true,
+      required:true,
     },
     pickupLocation: {
       lat: { type: Number },
