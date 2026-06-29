@@ -45,14 +45,14 @@ const tripSchema = new mongoose.Schema(
     // expectedEndTime:{},   //how we know epectedEndTime according to tripType
     routeSnapshot: [
       {
-        stopName: { type: String, trim: true, lowercase: true },
-        lat: { type: Number,  },
-        lng: { type: Number, },
-        order: { type: Number, },
+        name: { type: String, trim: true, lowercase: true },
+        lat: { type: Number },
+        lng: { type: Number },
+        order: { type: Number },
       },
     ],
-    totalStudents: { type: Number,},
-    boardedCount: { type: Number, },
+    totalStudents: { type: Number },
+    boardedCount: { type: Number },
   },
   { timestamps: true }
 );

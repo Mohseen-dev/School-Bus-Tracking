@@ -20,7 +20,7 @@ const driverSchema = new mongoose.Schema(
       required: true,
       minlength: [6, "Length of password  must be greater than 6"],
       maxlength: [12, "Length of password  must be smaller than 12"],
-      select: false,
+      // select: false,
     },
     phone: {
       type: String,
@@ -49,33 +49,19 @@ const driverSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-driverSchema.pre("save", async function(next) {
-
-   try {
-
-      const password = this.password;
-
-      if (!this.isModified("password")) {
-         return next();
-      }
-
-      if (!password) {
-         return next(new Error("Password is undefined before hashing"));
-      }
-
-      const hashedPassword = await bcrypt.hash(String(password), 10);
-
-      this.password = hashedPassword;
-
-      next();
-
-   } catch (error) {
-      console.log("HOOK ERROR:", error);
-      next(error);
-   }
-});
+driverSchema.pre("save",async function (next){
+    if(this.isModified("password")){
+        this.password = await bcrypt.hash(this.password,10);
+        // next();
+    }
+    // next();
+})
 driverSchema.methods.comparePassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
+
+  // console.log("something is comming from login contoller of driver",enteredPassword)
+  return await bcrypt.compare(enteredPassword,this.password)
+  // console.log("result",result);
+ 
 };
 
 export const Driver = mongoose.model("Driver", driverSchema);

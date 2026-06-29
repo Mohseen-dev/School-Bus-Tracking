@@ -178,7 +178,7 @@ export const assignStudentToBus = asyncHandler(async (req,res)=>{
   }
   // check student already assigned to bus
   if(student.assignedBusId){
-    throw new ApiError(400,"Student already assigned to bus");
+    throw new ApiError(400,"Student already assigned to other bus");
   }
   // check bus exist or not
   const bus = await Bus.findById(busId);
