@@ -42,7 +42,9 @@ export const driverAuthVerify = asyncHandler(async (req, res, next) => {
   if (!findedDriver) {
     throw new ApiError(404, "Admin no longer exists");
   }
+  const driverData = findedDriver.toObject();
+  delete driverData.password;
 
-  req.driver = findedDriver;
+  req.driver = driverData;
   next();
 });
