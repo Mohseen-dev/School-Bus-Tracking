@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import router from "./routes/admin.routes.js";
 import driverRouter from "./routes/driver.routes.js";
+import conductorRouter from "./routes/conductor.routes.js";
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use(cookieParser());
 
 app.use("/api/v1/admin/", router);
 app.use("/api/v1/driver/", driverRouter);
+app.use("/api/v1/conductor/",conductorRouter)
 
 export { app };
