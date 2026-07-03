@@ -1,6 +1,7 @@
 import { Parent } from "../../models/Parent.model.js";
 import ApiError from "../../utils/ApiError.js";
 import asyncHandler from "../../utils/asyncHandler.js";
+import ApiResponse from "../../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 
 export const parentLogin = asyncHandler(async (req, res) => {

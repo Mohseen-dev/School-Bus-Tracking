@@ -2,6 +2,7 @@ import asyncHandler from "../../utils/asyncHandler.js";
 import ApiError from "../../utils/ApiError.js";
 import ApiResponse from "../../utils/ApiResponse.js";
 import { Student } from "../../models/Student.model.js";
+import { Trip } from "../../models/Trip.model.js";
 
 export const currentTripForStudent = asyncHandler(async (req, res) => {
   const parentId = req.parent._id;
@@ -16,13 +17,12 @@ export const currentTripForStudent = asyncHandler(async (req, res) => {
       403,
       "You are not authorized to view this student's trip information"
     );
-
   const currentTripDoc = await Trip.findOne({
-    busId: student.busId,
+    busId: student.assignedBusId,
     status: { $in: ["scheduled", "started"] },
   }).populate("busId driverId conductorId");
 
-  const currentTrip = currentTripDoc ? "No Active Trip " : currentTripDoc;
+  const currentTrip = currentTripDoc ? currentTripDoc  : "No Active Trip ";
 
   return res
     .status(200)

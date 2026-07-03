@@ -4,6 +4,7 @@ import cors from "cors";
 import router from "./routes/admin.routes.js";
 import driverRouter from "./routes/driver.routes.js";
 import conductorRouter from "./routes/conductor.routes.js";
+import parentRouter from "./routes/parent.routes.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 app.use("/api/v1/admin/", router);
 app.use("/api/v1/driver/", driverRouter);
-app.use("/api/v1/conductor/",conductorRouter)
+app.use("/api/v1/conductor/", conductorRouter);
+app.use("/api/v1/parent/", parentRouter);
 
 export { app };

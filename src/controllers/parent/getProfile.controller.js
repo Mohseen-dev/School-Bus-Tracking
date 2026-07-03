@@ -3,7 +3,7 @@ import ApiResponse from "../../utils/ApiResponse.js";
 import ApiError from "../../utils/ApiError.js";
 
 export const getProfile = asyncHandler(async (req, res) => {
-  const parentId = req.parentId._id;
+  const parentId = req.parent._id;
   if (parentId) {
     return res
       .status(200)
